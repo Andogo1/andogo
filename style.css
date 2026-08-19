@@ -1,0 +1,413 @@
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background:
+        radial-gradient(circle at 15% 20%, #284b9c, transparent 30%),
+        radial-gradient(circle at 85% 75%, #9c246b, transparent 30%),
+        linear-gradient(135deg, #050611, #11152f, #080612);
+}
+
+/* ზედა ზოლი */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 0 28px;
+
+    background: rgba(0, 0, 0, 0.45);
+    backdrop-filter: blur(18px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+
+    z-index: 10;
+}
+
+.logo {
+    font-size: 18px;
+    font-weight: 900;
+    letter-spacing: 3px;
+
+    color: white;
+
+    text-shadow:
+        0 0 10px #5db7ff,
+        0 0 25px #5db7ff;
+}
+
+.stats {
+    display: flex;
+    gap: 10px;
+}
+
+.stats span {
+    padding: 8px 12px;
+
+    border-radius: 12px;
+
+    background: rgba(255, 255, 255, 0.1);
+
+    color: white;
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+/* Screens */
+
+.screen {
+    width: 100%;
+    height: 100%;
+
+    padding-top: 70px;
+
+    display: none;
+
+    place-items: center;
+}
+
+.screen.active {
+    display: grid;
+}
+
+/* მთავარი ბარათი */
+
+.menu {
+    width: min(92vw, 540px);
+
+    padding: 40px;
+
+    text-align: center;
+
+    background: rgba(15, 18, 42, 0.82);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    border-radius: 30px;
+
+    backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.5),
+        0 0 50px rgba(70, 120, 255, 0.12);
+
+    animation: appear 0.7s ease;
+}
+
+.bigIcon {
+    font-size: 60px;
+
+    margin-bottom: 5px;
+
+    filter:
+        drop-shadow(0 0 15px #ffffff)
+        drop-shadow(0 0 30px #5db7ff);
+}
+
+h1 {
+    margin: 0;
+
+    font-size: 48px;
+
+    font-weight: 900;
+
+    color: white;
+
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 25px #5db7ff;
+}
+
+h2 {
+    margin: 5px 0 25px;
+
+    color: #6dc4ff;
+
+    letter-spacing: 7px;
+
+    font-size: 18px;
+}
+
+p {
+    color: white;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+
+    text-shadow: 0 1px 5px black;
+}
+
+/* პერსონაჟები */
+
+.characters {
+    display: flex;
+
+    gap: 15px;
+
+    margin: 28px 0;
+}
+
+.character {
+    flex: 1;
+
+    padding: 15px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+
+    color: white;
+
+    font-size: 17px;
+    font-weight: bold;
+
+    background: rgba(255, 255, 255, 0.07);
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    border-radius: 18px;
+
+    cursor: pointer;
+
+    transition: 0.25s;
+}
+
+.character:hover {
+    transform: translateY(-4px);
+
+    background: rgba(255, 255, 255, 0.13);
+}
+
+.character.selected {
+    border-color: #65baff;
+
+    box-shadow:
+        0 0 20px rgba(80, 180, 255, 0.35);
+}
+
+.avatar {
+    width: 45px;
+    height: 45px;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 14px;
+
+    font-size: 22px;
+    font-weight: 900;
+
+    color: white;
+}
+
+/* გოგა */
+
+.goga {
+    background: linear-gradient(135deg, #4bb6ff, #465dff);
+
+    box-shadow: 0 0 20px #4bb6ff;
+}
+
+/* გიო */
+
+.gio {
+    background: linear-gradient(135deg, #7cff6b, #24a148);
+
+    box-shadow: 0 0 20px #7cff6b;
+}
+
+/* დათა */
+
+.data {
+    background: linear-gradient(135deg, #ffb347, #ff6b35);
+
+    box-shadow: 0 0 20px #ff9d4d;
+}
+
+/* დაწყების ღილაკი */
+
+.startButton {
+    width: 100%;
+
+    padding: 16px 25px;
+
+    border: none;
+
+    border-radius: 17px;
+
+    background: linear-gradient(
+        135deg,
+        #55baff,
+        #795cff
+    );
+
+    color: white;
+
+    font-size: 18px;
+
+    font-weight: 900;
+
+    cursor: pointer;
+
+    box-shadow:
+        0 10px 30px rgba(75, 120, 255, 0.4);
+
+    transition: 0.2s;
+}
+
+.startButton:hover {
+    transform: translateY(-3px) scale(1.02);
+
+    box-shadow:
+        0 15px 40px rgba(90, 130, 255, 0.6);
+}
+
+.controls {
+    margin-top: 16px;
+
+    color: white;
+
+    font-size: 14px;
+
+    opacity: 0.9;
+}
+
+/* თამაში */
+
+.gameScreen {
+    position: relative;
+}
+
+canvas {
+    width: min(94vw, 900px);
+
+    height: auto;
+
+    border-radius: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    box-shadow:
+        0 30px 100px rgba(0, 0, 0, 0.6);
+
+    background: #080a1c;
+}
+
+/* მობილურის ღილაკები */
+
+.mobileControls {
+    display: none;
+
+    position: absolute;
+
+    bottom: 25px;
+
+    gap: 20px;
+}
+
+.mobileControls button {
+    width: 75px;
+    height: 55px;
+
+    border-radius: 16px;
+
+    border: 1px solid white;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    font-size: 25px;
+}
+
+/* შედეგი */
+
+.finalScore {
+    margin: 25px;
+
+    font-size: 45px;
+
+    font-weight: 900;
+
+    color: #ffe66d;
+
+    text-shadow:
+        0 0 15px #ffe66d,
+        0 0 30px #ffb300;
+}
+
+/* ანიმაცია */
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: scale(0.85);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+}
+
+/* ტელეფონი */
+
+@media (max-width: 700px) {
+
+    header {
+        padding: 0 12px;
+    }
+
+    .logo {
+        font-size: 12px;
+    }
+
+    .stats {
+        gap: 4px;
+    }
+
+    .stats span {
+        padding: 7px;
+
+        font-size: 12px;
+    }
+
+    .menu {
+        padding: 28px 20px;
+    }
+
+    h1 {
+        font-size: 38px;
+    }
+
+    .mobileControls {
+        display: flex;
+    }
+
+}
