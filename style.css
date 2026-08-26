@@ -20,8 +20,6 @@ body {
         linear-gradient(135deg, #050611, #11152f, #080612);
 }
 
-/* ზედა ზოლი */
-
 header {
     position: fixed;
     top: 0;
@@ -73,8 +71,6 @@ header {
     border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-/* Screens */
-
 .screen {
     width: 100%;
     height: 100%;
@@ -89,8 +85,6 @@ header {
 .screen.active {
     display: grid;
 }
-
-/* მთავარი ბარათი */
 
 .menu {
     width: min(92vw, 540px);
@@ -158,8 +152,6 @@ p {
     text-shadow: 0 1px 5px black;
 }
 
-/* პერსონაჟები */
-
 .characters {
     display: flex;
 
@@ -224,12 +216,12 @@ p {
     color: white;
 }
 
-/* გოგა */
+/* ანა */
 
-.goga {
-    background: linear-gradient(135deg, #4bb6ff, #465dff);
+.ana {
+    background: linear-gradient(135deg, #ff79c6, #a855f7);
 
-    box-shadow: 0 0 20px #4bb6ff;
+    box-shadow: 0 0 20px #ff79c6;
 }
 
 /* გიო */
@@ -247,8 +239,6 @@ p {
 
     box-shadow: 0 0 20px #ff9d4d;
 }
-
-/* დაწყების ღილაკი */
 
 .startButton {
     width: 100%;
@@ -296,8 +286,6 @@ p {
     opacity: 0.9;
 }
 
-/* თამაში */
-
 .gameScreen {
     position: relative;
 }
@@ -316,8 +304,6 @@ canvas {
 
     background: #080a1c;
 }
-
-/* მობილურის ღილაკები */
 
 .mobileControls {
     display: none;
@@ -344,8 +330,6 @@ canvas {
     font-size: 25px;
 }
 
-/* შედეგი */
-
 .finalScore {
     margin: 25px;
 
@@ -360,8 +344,6 @@ canvas {
         0 0 30px #ffb300;
 }
 
-/* ანიმაცია */
-
 @keyframes appear {
 
     from {
@@ -375,8 +357,6 @@ canvas {
     }
 
 }
-
-/* ტელეფონი */
 
 @media (max-width: 700px) {
 
