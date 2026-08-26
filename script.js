@@ -9,7 +9,7 @@ const H = canvas.height;
    VARIABLES
 ========================= */
 
-let selectedCharacter = "goga";
+let selectedCharacter = "ana";
 
 let playing = false;
 
@@ -44,13 +44,11 @@ document.querySelectorAll(".character").forEach(button => {
 
         selectedCharacter = this.dataset.character;
 
-
         document
             .querySelectorAll(".character")
             .forEach(b => {
                 b.classList.remove("selected");
             });
-
 
         this.classList.add("selected");
 
@@ -67,17 +65,6 @@ document.addEventListener("keydown", function(event) {
 
     const key = event.key.toLowerCase();
 
-
-    /*
-        ინგლისური:
-        A = მარცხნივ
-        D = მარჯვნივ
-
-        ქართული:
-        ა = მარცხნივ
-        დ = მარჯვნივ
-    */
-
     if (
         event.code === "KeyA" ||
         key === "ა"
@@ -88,7 +75,6 @@ document.addEventListener("keydown", function(event) {
         event.preventDefault();
 
     }
-
 
     if (
         event.code === "KeyD" ||
@@ -108,7 +94,6 @@ document.addEventListener("keyup", function(event) {
 
     const key = event.key.toLowerCase();
 
-
     if (
         event.code === "KeyA" ||
         key === "ა"
@@ -119,7 +104,6 @@ document.addEventListener("keyup", function(event) {
         event.preventDefault();
 
     }
-
 
     if (
         event.code === "KeyD" ||
@@ -154,7 +138,6 @@ leftBtn.addEventListener("touchstart", function(event) {
 
 });
 
-
 leftBtn.addEventListener("touchend", function(event) {
 
     event.preventDefault();
@@ -162,7 +145,6 @@ leftBtn.addEventListener("touchend", function(event) {
     keys.left = false;
 
 });
-
 
 rightBtn.addEventListener("touchstart", function(event) {
 
@@ -172,7 +154,6 @@ rightBtn.addEventListener("touchstart", function(event) {
 
 });
 
-
 rightBtn.addEventListener("touchend", function(event) {
 
     event.preventDefault();
@@ -181,8 +162,6 @@ rightBtn.addEventListener("touchend", function(event) {
 
 });
 
-
-/* კომპიუტერზეც click */
 
 leftBtn.addEventListener("mousedown", function() {
     keys.left = true;
@@ -209,11 +188,9 @@ document
     .getElementById("startBtn")
     .addEventListener("click", startGame);
 
-
 document
     .getElementById("againBtn")
     .addEventListener("click", startGame);
-
 
 
 /* =========================
@@ -234,10 +211,8 @@ function startGame() {
 
     particles = [];
 
-
     keys.left = false;
     keys.right = false;
-
 
     player = {
 
@@ -249,30 +224,23 @@ function startGame() {
 
     };
 
-
     playing = true;
-
 
     document
         .getElementById("score")
         .textContent = score;
 
-
     document
         .getElementById("lives")
         .textContent = lives;
 
-
     showScreen("gameScreen");
 
-
     lastTime = performance.now();
-
 
     requestAnimationFrame(gameLoop);
 
 }
-
 
 
 /* =========================
@@ -289,13 +257,11 @@ function showScreen(id) {
 
         });
 
-
     document
         .getElementById(id)
         .classList.add("active");
 
 }
-
 
 
 /* =========================
@@ -312,17 +278,11 @@ function keepPlayerInside() {
 }
 
 
-
 /* =========================
    SPAWN OBJECT
 ========================= */
 
 function spawnObject() {
-
-    /*
-        რაც უფრო დიდხანს თამაშობ,
-        მეტეორის შანსი იზრდება.
-    */
 
     const meteorChance =
         Math.min(
@@ -330,21 +290,14 @@ function spawnObject() {
             0.65
         );
 
-
     const isMeteor =
         Math.random() < meteorChance;
-
-
-    /*
-        სიჩქარე ნელ-ნელა იზრდება.
-    */
 
     const extraSpeed =
         Math.min(
             gameTime * 4,
             300
         );
-
 
     objects.push({
 
@@ -362,11 +315,9 @@ function spawnObject() {
 
         speed:
             isMeteor
-
                 ? 190 +
                   Math.random() * 100 +
                   extraSpeed
-
                 : 150 +
                   Math.random() * 70 +
                   extraSpeed * 0.4,
@@ -384,7 +335,6 @@ function spawnObject() {
     });
 
 }
-
 
 
 /* =========================
@@ -423,7 +373,6 @@ function createParticles(x, y, type) {
 }
 
 
-
 /* =========================
    UPDATE
 ========================= */
@@ -432,21 +381,15 @@ function update(dt) {
 
     gameTime += dt;
 
-
-    /* PLAYER */
-
     let direction = 0;
-
 
     if (keys.left) {
         direction = -1;
     }
 
-
     if (keys.right) {
         direction = 1;
     }
-
 
     const playerSpeed =
         Math.min(
@@ -455,12 +398,10 @@ function update(dt) {
             520
         );
 
-
     player.x +=
         direction *
         playerSpeed *
         dt;
-
 
     keepPlayerInside();
 
@@ -469,7 +410,6 @@ function update(dt) {
 
     spawnTimer += dt;
 
-
     const spawnDelay =
         Math.max(
             0.16,
@@ -477,33 +417,27 @@ function update(dt) {
             gameTime * 0.004
         );
 
-
     if (spawnTimer >= spawnDelay) {
 
         let amount = 1;
-
 
         if (gameTime >= 20) {
             amount = 2;
         }
 
-
         if (gameTime >= 45) {
             amount = 3;
         }
 
-
         if (gameTime >= 75) {
             amount = 4;
         }
-
 
         for (let i = 0; i < amount; i++) {
 
             spawnObject();
 
         }
-
 
         spawnTimer = 0;
 
@@ -520,22 +454,18 @@ function update(dt) {
 
         const object = objects[i];
 
-
         object.y +=
             object.speed *
             dt;
 
-
         object.rotation +=
             dt * 3;
-
 
         const distanceX =
             Math.abs(
                 object.x -
                 player.x
             );
-
 
         const distanceY =
             Math.abs(
@@ -553,7 +483,6 @@ function update(dt) {
                 object.size + 22
         ) {
 
-
             /* STAR */
 
             if (
@@ -562,11 +491,9 @@ function update(dt) {
 
                 score += 10;
 
-
                 document
                     .getElementById("score")
                     .textContent = score;
-
 
                 createParticles(
                     object.x,
@@ -583,18 +510,15 @@ function update(dt) {
 
                 lives--;
 
-
                 document
                     .getElementById("lives")
                     .textContent = lives;
-
 
                 createParticles(
                     object.x,
                     object.y,
                     "meteor"
                 );
-
 
                 if (lives <= 0) {
 
@@ -609,11 +533,9 @@ function update(dt) {
 
             }
 
-
             objects.splice(i, 1);
 
         }
-
 
         else if (
             object.y >
@@ -638,24 +560,19 @@ function update(dt) {
         const particle =
             particles[i];
 
-
         particle.x +=
             particle.vx *
             dt;
-
 
         particle.y +=
             particle.vy *
             dt;
 
-
         particle.vy +=
             100 *
             dt;
 
-
         particle.life -= dt;
-
 
         if (
             particle.life <= 0
@@ -668,7 +585,6 @@ function update(dt) {
     }
 
 }
-
 
 
 /* =========================
@@ -685,21 +601,17 @@ function drawBackground() {
             H
         );
 
-
     gradient.addColorStop(
         0,
         "#080b23"
     );
-
 
     gradient.addColorStop(
         1,
         "#15102e"
     );
 
-
     ctx.fillStyle = gradient;
-
 
     ctx.fillRect(
         0,
@@ -721,29 +633,23 @@ function drawBackground() {
             (i * 137) %
             W;
 
-
         const y =
             (i * 83) %
             H;
-
 
         const size =
             i % 3 === 0
                 ? 2
                 : 1;
 
-
         ctx.globalAlpha =
             0.4 +
             (i % 5) / 10;
 
-
         ctx.fillStyle =
             "white";
 
-
         ctx.beginPath();
-
 
         ctx.arc(
             x,
@@ -753,16 +659,13 @@ function drawBackground() {
             Math.PI * 2
         );
 
-
         ctx.fill();
 
     }
 
-
     ctx.globalAlpha = 1;
 
 }
-
 
 
 /* =========================
@@ -773,27 +676,23 @@ function drawPlayer() {
 
     if (!player) return;
 
-
     ctx.save();
-
 
     ctx.translate(
         player.x,
         player.y
     );
 
-
     let color;
     let letter;
 
-
     if (
         selectedCharacter ===
-        "goga"
+        "ana"
     ) {
 
-        color = "#4db3ff";
-        letter = "G";
+        color = "#ff79c6";
+        letter = "A";
 
     }
 
@@ -814,7 +713,6 @@ function drawPlayer() {
 
     }
 
-
     ctx.shadowBlur = 25;
 
     ctx.shadowColor =
@@ -823,9 +721,7 @@ function drawPlayer() {
     ctx.fillStyle =
         color;
 
-
     ctx.beginPath();
-
 
     ctx.roundRect(
         -22,
@@ -835,28 +731,21 @@ function drawPlayer() {
         14
     );
 
-
     ctx.fill();
 
-
     ctx.shadowBlur = 0;
-
 
     ctx.fillStyle =
         "white";
 
-
     ctx.font =
         "900 22px Arial";
-
 
     ctx.textAlign =
         "center";
 
-
     ctx.textBaseline =
         "middle";
-
 
     ctx.fillText(
         letter,
@@ -864,11 +753,9 @@ function drawPlayer() {
         1
     );
 
-
     ctx.restore();
 
 }
-
 
 
 /* =========================
@@ -879,12 +766,10 @@ function drawObject(object) {
 
     ctx.save();
 
-
     ctx.translate(
         object.x,
         object.y
     );
-
 
     ctx.rotate(
         object.rotation
@@ -903,13 +788,10 @@ function drawObject(object) {
         ctx.shadowColor =
             "#ffe66d";
 
-
         ctx.fillStyle =
             "#ffe66d";
 
-
         ctx.beginPath();
-
 
         for (
             let i = 0;
@@ -922,11 +804,9 @@ function drawObject(object) {
                     ? 18
                     : 7;
 
-
             const angle =
                 -Math.PI / 2 +
                 i * Math.PI / 5;
-
 
             ctx.lineTo(
                 Math.cos(angle) *
@@ -937,7 +817,6 @@ function drawObject(object) {
             );
 
         }
-
 
         ctx.closePath();
 
@@ -955,13 +834,10 @@ function drawObject(object) {
         ctx.shadowColor =
             "#ff475d";
 
-
         ctx.fillStyle =
             "#ff5365";
 
-
         ctx.beginPath();
-
 
         ctx.moveTo(-20, -5);
 
@@ -975,18 +851,15 @@ function drawObject(object) {
 
         ctx.lineTo(-16, 14);
 
-
         ctx.closePath();
 
         ctx.fill();
 
     }
 
-
     ctx.restore();
 
 }
-
 
 
 /* =========================
@@ -1004,18 +877,13 @@ function drawParticles() {
                     particle.life
                 );
 
-
             ctx.fillStyle =
                 particle.type ===
                 "star"
-
                     ? "#ffe66d"
-
                     : "#ff5365";
 
-
             ctx.beginPath();
-
 
             ctx.arc(
                 particle.x,
@@ -1025,17 +893,14 @@ function drawParticles() {
                 Math.PI * 2
             );
 
-
             ctx.fill();
 
         }
     );
 
-
     ctx.globalAlpha = 1;
 
 }
-
 
 
 /* =========================
@@ -1046,29 +911,22 @@ function draw() {
 
     drawBackground();
 
-
     objects.forEach(
         drawObject
     );
 
-
     drawPlayer();
 
-
     drawParticles();
-
 
     ctx.fillStyle =
         "white";
 
-
     ctx.font =
         "bold 15px Arial";
 
-
     ctx.textAlign =
         "left";
-
 
     ctx.fillText(
         "⭐ ვარსკვლავი +10     ☄️ მეტეორებს აარიდე თავი!",
@@ -1077,7 +935,6 @@ function draw() {
     );
 
 }
-
 
 
 /* =========================
@@ -1090,25 +947,20 @@ function gameLoop(currentTime) {
         return;
     }
 
-
     const dt =
         Math.min(
             (currentTime -
                 lastTime) /
                 1000,
-
             0.033
         );
-
 
     lastTime =
         currentTime;
 
-
     update(dt);
 
     draw();
-
 
     if (playing) {
 
@@ -1119,7 +971,6 @@ function gameLoop(currentTime) {
     }
 
 }
-
 
 
 /* =========================
@@ -1133,7 +984,6 @@ function endGame(
 
     playing = false;
 
-
     document
         .getElementById("resultIcon")
         .textContent =
@@ -1141,22 +991,19 @@ function endGame(
             ? "🏆"
             : "✨";
 
-
     document
         .getElementById("resultTitle")
         .textContent =
         title;
 
-
     let name;
-
 
     if (
         selectedCharacter ===
-        "goga"
+        "ana"
     ) {
 
-        name = "გოგას";
+        name = "ანას";
 
     }
 
@@ -1175,7 +1022,6 @@ function endGame(
 
     }
 
-
     document
         .getElementById("resultText")
         .textContent =
@@ -1184,19 +1030,16 @@ function endGame(
         name +
         " საბოლოო ქულა:";
 
-
     document
         .getElementById("finalScore")
         .textContent =
         score;
-
 
     showScreen(
         "endScreen"
     );
 
 }
-
 
 
 /* =========================
